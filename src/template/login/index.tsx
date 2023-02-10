@@ -1,68 +1,78 @@
-import React from 'react';
+import React from "react";
+
+import * as S from "./styles";
 
 export const Login: React.FC = () => {
   return (
-    <div className="bg-no-repeat bg-cover bg-center relative" style={{
-      backgroundImage: `url(https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80)`,
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "center",
-      height: "100vh",
-      width: "100vw",
-    }}><div className="absolute bg-gradient-to-b from-green-500 to-green-400 opacity-75 inset-0 z-0"></div>
-  <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
-      <div className="flex-col flex  self-center p-10 sm:max-w-5xl xl:max-w-2xl  z-10">
-        <div className="self-start hidden lg:flex flex-col  text-white">
-          <img src="" className="mb-3"/>
-          <h1 className="mb-3 font-bold text-5xl">Hi ? Welcome Back Aji </h1>
-          <p className="pr-3">Lorem ipsum is placeholder text commonly used in the graphic, print,
-            and publishing industries for previewing layouts and visual mockups</p>
-        </div>
-      </div>
-      <div className="flex justify-center self-center  z-10">
-        <div className="p-12 bg-white mx-auto rounded-2xl w-100 ">
-            <div className="mb-4">
-              <h3 className="font-semibold text-2xl text-gray-800">Sign In </h3>
-              <p className="text-gray-500">Please sign in to your account.</p>
-            </div>
-            <div className="space-y-5">
-                        <div className="space-y-2">
-                              <label className="text-sm font-medium text-gray-700 tracking-wide">Email</label>
-              <input className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="" placeholder="mail@gmail.com"/>
+    <S.Container>
+      <S.Wrapper>
+        <S.LeftWrapper>
+          <S.LeftWrapperSection>
+            <S.Form>
+              <div className="flex flex-col items-center justify-center h-full w-full">
+                <div className="w-full py-10 md:py-8 lg:py-0">
+                  <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-extrabold xl:leading-8 text-gray-800 pt-6">
+                    Entrar
+                  </h3>
+                  <div>
+                    <button className="w-full border rounded-lg border-gray-800 py-2 px-2 md:py-3 md:px-3 flex items-center mt-4 md:mt-8">
+                      <p className="text-xs sm:text-sm md:text-base font-medium leading-none  ml-4 text-gray-800">
+                        Continuar com Google
+                      </p>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-center my-6">
+                    <div className="border-b border-gray-400 w-1/2"></div>
+                    <p className="text-xs sm:text-sm md:text-base font-medium leading-none text-gray-400 px-2.5">
+                      OU
+                    </p>
+                    <div className="border-b border-gray-400 w-1/2"></div>
+                  </div>
+                  <div>
+                    <div className="flex flex-col">
+                      <label className="text-sm sm:text-base md:text-lg font-semibold fleading-tight">
+                        E-mail
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-1.5 text-gray-700 border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-brand focus:outline-none"
+                        id="exampleFormControlInput1"
+                        placeholder="Example label"
+                      />
+                    </div>
+                    <div className="flex flex-col mt-6">
+                      <label className="text-sm sm:text-base md:text-lg font-semibold leading-tight">
+                        Senha
+                      </label>
+                      <input
+                        type="password"
+                        className="h-10 px-2 w-full text-white bg-gray-200 focus:outline-none rounded mt-2  "
+                      />
+                    </div>
+                  </div>
+                  <button className="bg-brand text-white w-full transition duration-150 ease-in-out hover:opacity-75 rounded px-8 py-3 text-xs md:text-sm mt-6 uppercase">
+                    Fazer Login
+                  </button>
+                  <div className="flex items-center mt-5">
+                    <p className="text-xs font-medium leading-none text-gray-500">
+                      Ainda não tem uma conta?
+                    </p>
+                    <a className="text-xs font-medium leading-none underline text-gray-800 ml-2">
+                      Cadastra-se
+                    </a>
+                  </div>
+                </div>
+                <div className="pb-6 md:pb-12"></div>
               </div>
-                          <div className="space-y-2">
-              <label className="mb-5 text-sm font-medium text-gray-700 tracking-wide">
-                Password
-              </label>
-              <input className="w-full content-center text-base px-4 py-2 border  border-gray-300 rounded-lg focus:outline-none focus:border-green-400" type="" placeholder="Enter your password"/>
-            </div>
-              <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input id="remember_me" name="remember_me" type="checkbox" className="h-4 w-4 bg-blue-500 focus:ring-blue-400 border-gray-300 rounded"/>
-                <label className="ml-2 block text-sm text-gray-800">
-                  Remember me
-                </label>
-              </div>
-              <div className="text-sm">
-                <a href="#" className="text-green-400 hover:text-green-500">
-                  Forgot your password?
-                </a>
-              </div>
-            </div>
-            <div>
-              <button type="submit" className="w-full flex justify-center bg-green-400  hover:bg-green-500 text-gray-100 p-3  rounded-full tracking-wide font-semibold  shadow-lg cursor-pointer transition ease-in duration-500">
-                Sign in
-              </button>
-            </div>
-            </div>
-            <div className="pt-5 text-center text-gray-400 text-xs">
-              <span>
-                Copyright © 2021-2022
-                <a href="https://codepen.io/uidesignhub" rel="" target="_blank" title="Ajimon" className="text-green hover:text-green-500 ">AJI</a></span>
-            </div>
-        </div>
-      </div>
-  </div>
-</div>
+            </S.Form>
+          </S.LeftWrapperSection>
+        </S.LeftWrapper>
+        <S.RightWrapper>
+          <S.RightWrapperSection>
+            <S.RightWrapperImage src="https://a-static.besthdwallpaper.com/dog-animals-puppies-wallpaper-1920x1200-84131_6.jpg" />
+          </S.RightWrapperSection>
+        </S.RightWrapper>
+      </S.Wrapper>
+    </S.Container>
   );
-}
+};
