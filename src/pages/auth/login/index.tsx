@@ -1,9 +1,9 @@
 import { NextPage } from 'next';
 import React from 'react';
-import { Login } from '../../../template/login';
+import { Login } from '../../../template/auth/login';
 
-const login: NextPage = () => {
+const LoginPage: NextPage = () => {
   return <Login/>;
 }
 
-export default login;
+export default LoginPage;

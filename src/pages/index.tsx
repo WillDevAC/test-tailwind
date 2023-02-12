@@ -1,5 +1,8 @@
-export default function Home() {
-  return (
-    <h1>Home</h1>
-  )
+import React from 'react';
+import { Home } from '../template/home';
+
+const HomePage: React.FC = () => {
+  return <Home/>;
 }
+
+export default HomePage;
