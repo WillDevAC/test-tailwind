@@ -1,3 +1,4 @@
+import router from "next/router";
 import React from "react";
 
 import { Ong } from "../../../interfaces/pet";
@@ -22,11 +23,11 @@ export const PetCard: React.FC<IPetCard> = ({
   return (
     <>
       <div className="flex flex-col p-2 h-96 bg-white border-2 rounded-md">
-        <div className="w-full h-2/4 -z-10">
+        <div className="w-full h-2/4 relative">
           <img
             src={profilePicture}
             alt={pet}
-            className="w-full h-full object-cover object-center rounded-md "
+            className="w-full h-full object-cover object-center rounded-md"
           />
         </div>
         <div className="py-5">
@@ -48,7 +49,10 @@ export const PetCard: React.FC<IPetCard> = ({
               <Icon.IoMaleFemale size={20} color="gray" title={sex} />
             )}
           </p>
-          <button className="mt-7 px-4 py-2 bg-brand hover:bg-red-400 text-white text-sm font-medium rounded-md w-full">
+          <button
+            className="mt-7 px-4 py-2 bg-brand hover:bg-red-400 text-white text-sm font-medium rounded-md w-full"
+            onClick={() => router.push(`/pet/${id}`)}
+          >
             Detalhes
           </button>
         </div>

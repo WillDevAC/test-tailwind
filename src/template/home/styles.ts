@@ -13,7 +13,7 @@ export const FiltersGrid = tw.div `
 `;
 
 export const FiltersContent = tw.div `
-    flex flex-col w-80 gap-3 sticky top-20 h-96 -z-10
+    flex flex-col w-80 gap-3 sticky top-20 h-96
 `
 
 export const Filters = tw.div `

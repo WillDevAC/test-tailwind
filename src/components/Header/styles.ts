@@ -1,7 +1,7 @@
 import tw from "tailwind-styled-components";
 
 export const Header = tw.header`
-   bg-white sticky top-0
+   bg-white sticky top-0 z-10
 `;
 
 export const HeaderWrapper = tw.div`

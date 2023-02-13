@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { PetCard, SpecieCard } from "../../components/Cards";
+import { PetCard, PetLoader, SpecieCard } from "../../components/Cards";
 import { FilterCard } from "../../components/Cards";
 import { FilterContext } from "../../contexts/filter.context";
 import { ICategories } from "../../interfaces/categories";
@@ -51,7 +51,7 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
 
     if (tokenBearer) {
       const pets_filtered_logged = await api.post(
-        "/pet/filter/multiparam",
+        "/pet/filter/multiparam/non-logged",
         {
           specie: specie,
           size: size,
@@ -141,7 +141,9 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
                   )}
                 </>
               ) : (
-                "Carregando..."
+                <>
+                  <PetLoader count={3} />
+                </>
               )}
             </S.PetCardList>
           </S.PetCardContent>
