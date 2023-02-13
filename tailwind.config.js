@@ -10,7 +10,15 @@ module.exports = {
       colors: {
         "brand": "#ec5161",
       },
+      gridTemplateColumns: {
+        'auto': 'auto 1fr',
+      }
     },
   },
-  plugins: [],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+  ],
 }

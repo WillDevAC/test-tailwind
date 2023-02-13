@@ -1,11 +1,11 @@
 import tw from "tailwind-styled-components";
 
 export const Header = tw.header`
-   bg-white
+   bg-white sticky top-0
 `;
 
 export const HeaderWrapper = tw.div`
-    border py-3 px-6
+    border py-3 px-6 
 `;
 
 export const HeaderContent = tw.div`
@@ -27,3 +27,7 @@ export const HeaderLink = tw.div`
 export const HeaderActions = tw.div`
     ml-2 flex bg-brand text-white cursor-pointer items-center gap-x-1 rounded-md border py-2 px-4 hover:bg-red-400
 `;
+
+export const Avatar = tw.img `
+    w-10 h-10 p-1 rounded-full ring-2 ng-brand dark:ring-brand
+`

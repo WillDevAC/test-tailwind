@@ -1,8 +1,27 @@
-import React from 'react';
-import { Home } from '../template/home';
+import React from "react";
 
-const HomePage: React.FC = () => {
-  return <Home/>;
+import { InferGetServerSidePropsType } from "next";
+import { FilterProvider } from "../contexts/filter.context";
+
+import { Home } from "../template/home";
+import { api } from "../services/api";
+
+export async function getServerSideProps() {
+  const categories = await api.get("/pet/options");
+
+  return {
+    props: { categories: categories.data },
+  };
 }
 
-export default HomePage;
+type IHome = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+export default function HomePage({ categories }: IHome) {
+  return (
+    <>
+      <FilterProvider>
+        <Home filters={categories} />
+      </FilterProvider>
+    </>
+  );
+}

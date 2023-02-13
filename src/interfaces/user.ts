@@ -16,7 +16,7 @@ export type TUser = {
   sex: string;
   verified: boolean;
   active: boolean;
-  profilePicture: any;
+  profilePicture: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: undefined;
