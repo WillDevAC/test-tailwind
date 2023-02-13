@@ -4,6 +4,8 @@ import { AuthProvider } from "../contexts/auth.context"
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
+import 'slick-carousel/slick/slick-theme.css';
+import 'slick-carousel/slick/slick.css';
 
 import "../styles/globals.css"
 
