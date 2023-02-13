@@ -4,6 +4,8 @@ import { SiDatadog } from 'react-icons/si';
 import { FcOnlineSupport } from  'react-icons/fc';
 import { MdKeyboardArrowDown, MdPets } from 'react-icons/md';
 import { FaCat, FaDog } from 'react-icons/fa';
+import { BsGenderMale, BsGenderFemale } from 'react-icons/bs';
+import { IoMaleFemale } from 'react-icons/io5';
 
 export default {
     FcGoogle,
@@ -13,5 +15,8 @@ export default {
     MdKeyboardArrowDown,
     FaCat,
     FaDog,
-    MdPets
+    MdPets,
+    BsGenderMale,
+    BsGenderFemale,
+    IoMaleFemale
 }
