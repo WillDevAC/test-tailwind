@@ -77,7 +77,7 @@ export const FormFooterSignup = tw.div`
 `;
 
 export const FormButtonAction = tw.button`
-    bg-brand text-white w-full transition duration-150 ease-in-out hover:opacity-75 rounded px-8 py-3 text-xs md:text-sm mt-6 uppercase
+    bg-brand flex items-center justify-center text-center text-white w-full transition duration-150 ease-in-out hover:opacity-75 rounded px-8 py-3 text-xs md:text-sm mt-6 uppercase
 `;
 
 export const FormInputs = tw.div `

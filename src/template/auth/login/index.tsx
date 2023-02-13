@@ -87,7 +87,7 @@ export const Login: React.FC = () => {
                         <>{errors?.password?.message}</>
                       </div>
                     </S.FormInputs>
-                    <S.FormButtonAction>
+                    <S.FormButtonAction type="submit" disabled={isLoading}>
                       {!isLoading ? (
                         "Fazer Login"
                       ) : (

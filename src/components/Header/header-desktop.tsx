@@ -7,12 +7,15 @@ import { useRouter } from "next/router";
 import Icon from "../../utils/icons.config";
 
 import * as S from "./styles";
+import { UserOptions } from "../Cards";
 
 export const HeaderDesktop: React.FC = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const [user, setUser] = useState<TUser>({} as TUser);
 
   const router = useRouter();
+
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -30,6 +33,7 @@ export const HeaderDesktop: React.FC = () => {
             <S.HeaderLogo>
               <img src="/logo.svg" alt="Logo do site" className="w-40" />
             </S.HeaderLogo>
+            
             <S.HeaderLinks>
               <>
                 <S.HeaderLink>
@@ -43,7 +47,7 @@ export const HeaderDesktop: React.FC = () => {
                 <div className="flex items-center">
                 {isAuthenticated ? (
                   <>
-                    <div className="flex items-center cursor-pointer">
+                    <div className="flex items-center cursor-pointer" onClick={() => setIsDropdownVisible(!isDropdownVisible)}>
                       <div className="pl-3">
                         {user.profilePicture && (
                           <S.Avatar src={user.profilePicture} />
@@ -54,6 +58,7 @@ export const HeaderDesktop: React.FC = () => {
                         <Icon.MdKeyboardArrowDown size={15} />
                       </div>
                     </div>
+                    { isDropdownVisible && <UserOptions/> }
                   </>
                 ) : (
                   <S.HeaderActions>

@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import { Layout } from "../../layout";
 import { api } from "../../services/api";
 import Icon from "../../utils/icons.config";
+import { format } from "date-fns";
 
 export async function getServerSideProps(context: any) {
   const { id } = context.query;
@@ -28,8 +29,6 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
     slidesToShow: 1,
     slidesToScroll: 1,
   };
-
-  console.log(pet)
 
   return (
     <Layout>
@@ -55,7 +54,7 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                     </div>
                     <div className="h-96">
                       <img
-                        className="object-contain w-full lg:h-full"
+                        className="object-contain w-full lg:h-full object-center"
                         src={pet.profilePicture}
                         alt=""
                       />
@@ -73,7 +72,10 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                   <button className="bg-transparent hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded">
                     Compartilhar
                   </button>
-                  <a className="bg-transparent cursor-pointer hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded" href={`tel:${pet.ong.phone}`}>
+                  <a
+                    className="bg-transparent cursor-pointer hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded"
+                    href={`tel:${pet.ong.phone}`}
+                  >
                     Falar com a ONG
                   </a>
                 </div>
@@ -88,7 +90,10 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                   <h2 className="max-w-xl mt-6 text-3xl font-semibold leading-loose tracking-wide text-brand md:text-2x uppercase">
                     {pet.specie.specieName} {pet.name}
                   </h2>
-                  <p>Publicado por {pet.ong.name}</p>
+                  <p>
+                    Publicado por {pet.ong.name} em{" "}
+                    {format(parseInt(pet.createdAt), "dd/mm/yyyy")}
+                  </p>
                   <div className="flex flex-wrap items-center pt-10 mb-6 text-gray-500">
                     {pet.description}
                   </div>
@@ -111,7 +116,7 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                                   Peso
                                 </p>
                                 <h2 className="text-base font-semibold text-black">
-                                  {pet.weight}
+                                  {pet.weight} kg
                                 </h2>
                               </div>
                             </div>
@@ -157,7 +162,7 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                                 </p>
                                 <h2 className="text-base font-semibold text-black">
                                   <a
-                                    href="#"
+                                    href="https://vet.ufmg.br/ARQUIVOS/FCK/file/Vers%C3%A3o%20resumida%20caderneta%20c%C3%A3es%20e%20gatos.pdf"
                                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                                   >
                                     ver carteirinha

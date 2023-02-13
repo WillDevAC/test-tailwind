@@ -39,7 +39,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         localStorage.removeItem("nextauth-token");
         localStorage.removeItem("nextauth-credentials");
         setIsAuthenticated(false);
-        router.push("/");
+        router.push("/auth/login");
         toast.warning("Sua sessão expirou! Faça login novamente.");
       } else {
         setIsAuthenticated(true);
@@ -87,6 +87,7 @@ const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     await localStorage.removeItem("nextauth-credentials");
     setIsAuthenticated(false);
     router.push("/");
+    toast.warn('Você desconectou do sistema! Até a próxima!');
   };
 
   return (

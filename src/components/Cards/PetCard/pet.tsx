@@ -1,9 +1,10 @@
 import router from "next/router";
-import React from "react";
+import React, { useState } from "react";
 
 import { Ong } from "../../../interfaces/pet";
 
 import Icon from "../../../utils/icons.config";
+import Img from "next/image";
 
 interface IPetCard {
   id: string | number;
@@ -24,10 +25,12 @@ export const PetCard: React.FC<IPetCard> = ({
     <>
       <div className="flex flex-col p-2 h-96 bg-white border-2 rounded-md">
         <div className="w-full h-2/4 relative">
-          <img
+          <Img
             src={profilePicture}
             alt={pet}
             className="w-full h-full object-cover object-center rounded-md"
+            width={500}
+            height={500}
           />
         </div>
         <div className="py-5">

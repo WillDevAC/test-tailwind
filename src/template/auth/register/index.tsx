@@ -94,7 +94,7 @@ export const Register: React.FC = () => {
                       <>{errors?.password?.message}</>
                     </div>
                   </S.FormInputs>
-                  <S.FormButtonAction type="submit">
+                  <S.FormButtonAction type="submit" disabled={isLoading}>
                     {!isLoading ? (
                       "Registre-se"
                     ) : (

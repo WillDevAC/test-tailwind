@@ -1,13 +1,14 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { PetCard, PetLoader, SpecieCard } from "../../components/Cards";
 import { FilterCard } from "../../components/Cards";
 import { FilterContext } from "../../contexts/filter.context";
 import { ICategories } from "../../interfaces/categories";
 import { IPet } from "../../interfaces/pet";
 import { Layout } from "../../layout";
 import { api } from "../../services/api";
+
+import { PetCard, PetLoader, SpecieCard } from "../../components/Cards";
 
 import * as S from "./styles";
 
@@ -31,7 +32,6 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
 
     if (tokenBearer) {
       const responsePetListLogged = await api.get("/user/profile/pet/feed", {
-        signal: controller.signal,
         headers: {
           Authorization: "Bearer " + tokenBearer,
         },
@@ -40,9 +40,6 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
     } else {
       const responsePetListNotLogged = await api.get(
         "/user/profile/pet/feed-non-logged",
-        {
-          signal: controller.signal,
-        }
       );
       return responsePetListNotLogged;
     }
@@ -137,8 +134,8 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
             <S.PetCardList>
               {!isPetLoading ? (
                 <>
-                  {!petsList ? (
-                    "Nenhum pet encontrado"
+                  {petsList.length <= 0 ? (
+                    "Nenhum pet encontrado."
                   ) : (
                     <>
                       {petsList.map((response, key) => (
@@ -156,7 +153,7 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
                 </>
               ) : (
                 <>
-                  <PetLoader count={3} />
+                  <PetLoader count={5} />
                 </>
               )}
             </S.PetCardList>
