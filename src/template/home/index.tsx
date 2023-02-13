@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-import { SpecieCard } from "../../components/Cards";
-import { FilterCard } from "../../components/Cards/FilterCard";
+import { PetCard, SpecieCard } from "../../components/Cards";
+import { FilterCard } from "../../components/Cards";
 import { FilterContext } from "../../contexts/filter.context";
 import { ICategories } from "../../interfaces/categories";
+import { IPet } from "../../interfaces/pet";
 import { Layout } from "../../layout";
+import { api } from "../../services/api";
 
 import * as S from "./styles";
 
@@ -14,12 +16,39 @@ interface IHomeProps {
 }
 
 export const Home: React.FC<IHomeProps> = ({ filters }) => {
+  const [petsList, setPetsList] = useState<IPet[]>([]);
   const { selectedOptions } = useContext(FilterContext);
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
+  const getByPetIsFilterEmpty = async () => {
+    const tokenBearer = localStorage.getItem("nextauth-token");
+
+    if (tokenBearer) {
+      const responsePetListLogged = await api.get("/user/profile/pet/feed", {
+        headers: {
+          Authorization: "Bearer " + tokenBearer,
+        },
+      });
+      return responsePetListLogged;
+    } else {
+      const responsePetListNotLogged = await api.get(
+        "/user/profile/pet/feed-non-logged"
+      );
+      return responsePetListNotLogged;
+    }
+  };
+
   useEffect(() => {
-    console.log(selectedOptions);
+    const isAllPropertiesFilterEmptyFilter = Object.values(
+      selectedOptions
+    ).every((val) => val.length === 0);
+
+    if (isAllPropertiesFilterEmptyFilter) {
+      getByPetIsFilterEmpty().then((petList) => {
+        setPetsList(petList.data);
+      });
+    }
   }, [selectedOptions]);
 
   return (
@@ -39,25 +68,20 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
               </S.FiltersContent>
             </>
           )}
-          <div className="container mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-              <div className="flex justify-center p-3 h-80 bg-white border-2 rounded-md">
-                <div className="w-full h-2/4">
-                  <img src="https://scontent.frbr2-1.fna.fbcdn.net/v/t1.6435-9/30652433_1225707757560853_4849660582816645120_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=9267fe&_nc_eui2=AeH2ZtSQ7MirymdGNf59MVoO48RIAJ55PKjjxEgAnnk8qK4Ikk0_Fy2t_wMNo3Sj1_8qvGHJedE5HPmE8Nzcvpux&_nc_ohc=IJujVrWjgUUAX903JWi&_nc_ht=scontent.frbr2-1.fna&oh=00_AfDfhasrJYLHBBknxP73X5baZ72KurlpzoP1A0YCqdLs7g&oe=6411492C" alt="" className="w-full h-full object-cover bg-center rounded-md"/>
-                </div>
-              </div>
-              <div className="flex justify-center p-3 h-80 bg-white border-2 rounded-md">
-                <div className="w-full h-2/4">
-                  <img src="https://scontent.frbr2-1.fna.fbcdn.net/v/t1.6435-9/47200263_2235351546498099_5770323450195345408_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeGNOTpZVfW-q_CqRTQF-3_monha9V9eP8OieFr1X14_w3sWLifcejGb06MVAzOBcoBhZzy2VbbEQ3Rbmzk52fyJ&_nc_ohc=1E2JgsusmZAAX_2ykQY&_nc_ht=scontent.frbr2-1.fna&oh=00_AfDygc_b9TVN4dkcEQFCuOWbUWl-1qySLU7OBrZqiofWbg&oe=64112702" alt="" className="w-full h-full object-cover bg-center rounded-md"/>
-                </div>
-              </div>
-              <div className="flex justify-center p-3 h-80 bg-white border-2 rounded-md">
-                <div className="w-full h-2/4">
-                  <img src="https://scontent.frbr2-1.fna.fbcdn.net/v/t31.18172-8/10688434_517931648344167_6949550487631113186_o.jpg?_nc_cat=111&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeEiT_gF9vDEIhgDMMAUMuEXKunCeydMcPkq6cJ7J0xw-YF22sGCqAezZo_OCRRoskUV1o3FPWg_7zFXFvQUrBhq&_nc_ohc=4FEp8je6bHsAX8vL2xX&tn=xlxH099B-VM9NKnS&_nc_ht=scontent.frbr2-1.fna&oh=00_AfA52yhnNjU55amn6JRqxo5Cajpvs_rHALpuLyKklIOgrA&oe=6411454E" alt="" className="w-full h-full object-cover bg-center rounded-md"/>
-                </div>
-              </div>
-            </div>
-          </div>
+          <S.PetCardContent>
+            <S.PetCardList>
+              {petsList.map((response, key) => (
+                <PetCard
+                  key={key}
+                  id={response.id}
+                  pet={response.name}
+                  sex={response.sex}
+                  ong={response.ong}
+                  profilePicture={response.profilePicture}
+                />
+              ))}
+            </S.PetCardList>
+          </S.PetCardContent>
         </S.FiltersGrid>
       </S.Main>
     </Layout>

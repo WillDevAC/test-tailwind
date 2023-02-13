@@ -23,3 +23,11 @@ export const Filters = tw.div `
 export const Pets = tw.div `
 
 `
+
+export const PetCardList = tw.div `
+    grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10
+`;
+
+export const PetCardContent = tw.div `
+    container mx-auto
+`
