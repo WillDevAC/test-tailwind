@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
 import { PetCard, PetLoader, SpecieCard } from "../../components/Cards";
@@ -22,13 +22,16 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
 
   const isMobile = useMediaQuery({ maxWidth: 767 });
 
-  const getByPetIsFilterEmpty = async () => {
+  const controller = new AbortController();
+
+  const getByPetIsFilterEmpty = useCallback(async () => {
     const tokenBearer = localStorage.getItem("nextauth-token");
 
     setPetLoading(true);
 
     if (tokenBearer) {
       const responsePetListLogged = await api.get("/user/profile/pet/feed", {
+        signal: controller.signal,
         headers: {
           Authorization: "Bearer " + tokenBearer,
         },
@@ -36,13 +39,16 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
       return responsePetListLogged;
     } else {
       const responsePetListNotLogged = await api.get(
-        "/user/profile/pet/feed-non-logged"
+        "/user/profile/pet/feed-non-logged",
+        {
+          signal: controller.signal,
+        }
       );
       return responsePetListNotLogged;
     }
-  };
+  }, [controller.signal]);
 
-  const getByPetIsFilterNotEmpty = async () => {
+  const getByPetIsFilterNotEmpty = useCallback(async () => {
     const { specie, size, sex } = selectedOptions;
 
     const tokenBearer = localStorage.getItem("nextauth-token");
@@ -61,6 +67,7 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
           headers: {
             Authorization: "Bearer " + tokenBearer,
           },
+          signal: controller.signal,
         }
       );
       return pets_filtered_logged;
@@ -71,11 +78,14 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
           specie: specie,
           size: size,
           sex: sex,
+        },
+        {
+          signal: controller.signal,
         }
       );
       return pets_filtered_notLogged;
     }
-  };
+  }, [controller.signal]);
 
   useEffect(() => {
     const isAllPropertiesFilterEmptyFilter = Object.values(
@@ -100,6 +110,10 @@ export const Home: React.FC<IHomeProps> = ({ filters }) => {
           setPetLoading(false);
         });
     }
+
+    return () => {
+      controller.abort();
+    };
   }, [selectedOptions]);
 
   return (

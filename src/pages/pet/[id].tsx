@@ -73,7 +73,7 @@ const PetPage: NextPage<IPetPage> = ({ pet }) => {
                   <button className="bg-transparent hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded">
                     Compartilhar
                   </button>
-                  <a className="bg-transparent cursor-pointer hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded">
+                  <a className="bg-transparent cursor-pointer hover:bg-brand text-brand font-semibold hover:text-white py-2 px-4 border border-brand hover:border-transparent rounded" href={`tel:${pet.ong.phone}`}>
                     Falar com a ONG
                   </a>
                 </div>
